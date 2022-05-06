@@ -7,14 +7,14 @@ Created on Fri Jun 19 01:14:05 2020
 
 import os
 import re
-os.chdir('I:/Movies/')
+os.chdir('D:/Downloads/')
 
 def clean(f):
     rem = r'720p|BluRay|x264|YIFY|juggs|\[ETRG\]|HDRip|\[YTS.AG\]|dvdrip|xvid|ETRG|HDTV|\
         |H264|AC3|xvid|aac|brrip|\[|\]|\{|\}|saas|mp3|rarbg|web-dl|1080p|dvdscr|tehmovies|\
             teh-music|mkvcage| Hc|ganool|-Evo|bdrip|teh-music|nex1movie|shaanig|\
         Korsub|webrip|aqos|S4A|-sam|blu-ray| biz|480p|Mkvhub|Film2Movie|Galaxyrg|\
-            Tehtmovies|- Com|Iran-film|30Nama|Wb-Dl|x265'
+            Tehtmovies|- Com|Iran-film|30Nama|Wb-Dl|x265|2Ch|10Bit|Psa'
     f = re.sub(rem, '', f, flags=re.IGNORECASE)
     f = re.sub('\.', ' ', f, flags=re.IGNORECASE)
     f = re.sub('_', ' ', f, flags=re.IGNORECASE)
