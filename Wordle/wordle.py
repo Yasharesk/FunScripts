@@ -68,7 +68,7 @@ if __name__ == '__main__':
         chk = True
         while chk:
             response = input('Response: ')
-            if (len(response) != 5) | (set(response) != set('gmy')):
+            if (len(response) != 5) | (not (set(response).issubset(set('gmy')))):
                 print('Check the response!')
             else:
                 chk = False
