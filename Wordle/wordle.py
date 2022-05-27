@@ -24,7 +24,6 @@ def read_words():
             
     wordle_words = [x for x in words if len(x) == 5]
     wordle_words = [x for x in wordle_words if '\'' not in x]
-    wordle_words = [x for x in wordle_words if len(set(x)) == 5]
     return wordle_words
 
 
@@ -57,10 +56,13 @@ def set_result(used: str, response: str) -> [dict]:
     return result
 
 
-if __name__ == '__main__':
+def main():
     wordle_words = read_words()
     print('Here are the first suggestions to start the game:')
-    print(sort_by_score(wordle_words)[:10])
+    
+    # For the first batch we remove words with duplicate letters to increase the number of hits/misses
+    print(sort_by_score([x for x in wordle_words if len(set(x))==5])[:10])
+    
     turns = 1
     while turns < 6:
         used = input('Word played: ')
@@ -88,3 +90,6 @@ if __name__ == '__main__':
     if turns > 6:
         print('Damn it!')
         input('')
+
+if __name__ == '__main__':
+    main()
