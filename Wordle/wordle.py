@@ -8,7 +8,8 @@ Created on Fri May  6 11:32:34 2022
 from collections import Counter
 
 
-def letter_count(word_list):
+def letter_count(word_list: list[str]) -> Counter:
+    '''Count the number of occurances of every letter in the list'''
     cnt = Counter()
     for word in word_list:
         for letter in word:
@@ -16,41 +17,46 @@ def letter_count(word_list):
     return cnt
 
 
-def read_words():    
+def read_words() -> list[str]:
+    '''Read the words from the file and create a list of 5 letter words'''
     words = []
     with open('Data/words') as f:
         for line in f.readlines():
             words.append(line.strip().lower())
-            
     wordle_words = [x for x in words if len(x) == 5]
     wordle_words = [x for x in wordle_words if '\'' not in x]
     return wordle_words
 
 
-def remove_letter(word_list, letter):
+def letter_missed(word_list: list[str], letter: str) -> list[str]:
+    '''Update the word list if the letter is not in the word [response == 'm']'''
     return [x for x in word_list if letter not in x]
 
 
-def letter_found(word_list, letter, i):
+def letter_found(word_list: list[str], letter: str, i: int) -> list[str]:
+    '''Update the word list if the letter is in the word not in the right place [response == 'y']'''
     w = [x for x in word_list if letter in x]
     w = [x for x in w if letter != x[i]]
     return w
 
-def letter_hit(word_list, letter, i):
+
+def letter_hit(word_list: list[str], letter: str, i: int) -> list[str]:
+    '''Update the word list if the letter is in the word in the right place [response == 'g']'''
     return [x for x in word_list if x[i] == letter]
 
 
-# TODO: Fix the scoring to remove the found letters from calculations
-def sort_by_score(word_list):
+def sort_by_score(word_list: list[str]) -> list[str]:
+    '''
+    Scores are calculated as the sum of the count of each letter in the list.
+    List sorted by highest scores is returned.
+    '''
     cnt = letter_count(word_list)
     word_list.sort(key=lambda x: sum([cnt[s] for s in x]), reverse=True)
     return word_list
 
 
-def set_result(used: str, response: str) -> [dict]:
-    '''
-    
-    '''
+def set_result(used: str, response: str) -> list[dict]:
+    '''Transform the 'word used' and 'response' provided by the user to a code readable format'''
     result = list(enumerate(zip(used, response)))
     result = [{'index': x[0], 'letter': x[1][0], 'response': x[1][1]} for x in result] 
     return result
@@ -77,11 +83,12 @@ def main():
         
         if response == 'ggggg':
             print('Nice!')
+            input('')
             break
         result = set_result(used, response)
         for item in result:
             if item['response'] == 'm':
-                wordle_words = remove_letter(wordle_words, item['letter'])
+                wordle_words = letter_missed(wordle_words, item['letter'])
             elif item['response'] == 'g':
                 wordle_words = letter_hit(wordle_words, item['letter'], item['index'])
             elif item['response'] == 'y':
@@ -90,6 +97,7 @@ def main():
     if turns > 6:
         print('Damn it!')
         input('')
+
 
 if __name__ == '__main__':
     main()
