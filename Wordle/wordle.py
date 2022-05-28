@@ -12,7 +12,7 @@ def letter_count(word_list: list[str]) -> Counter:
     '''Count the number of occurances of every letter in the list'''
     cnt = Counter()
     for word in word_list:
-        for letter in word:
+        for letter in set(word):
             cnt[letter] += 1
     return cnt
 
@@ -25,11 +25,13 @@ def read_words() -> list[str]:
             words.append(line.strip().lower())
     wordle_words = [x for x in words if len(x) == 5]
     wordle_words = [x for x in wordle_words if '\'' not in x]
+    wordle_words = [x for x in wordle_words if len(set(x)) == 5]
     return wordle_words
 
 
 def letter_missed(word_list: list[str], letter: str) -> list[str]:
     '''Update the word list if the letter is not in the word [response == 'm']'''
+    # TODO: Add a check to make sure the previous hits are not removed
     return [x for x in word_list if letter not in x]
 
 
@@ -51,7 +53,7 @@ def sort_by_score(word_list: list[str]) -> list[str]:
     List sorted by highest scores is returned.
     '''
     cnt = letter_count(word_list)
-    word_list.sort(key=lambda x: sum([cnt[s] for s in x]), reverse=True)
+    word_list.sort(key=lambda x: sum([cnt[s] for s in set(x)]), reverse=True)
     return word_list
 
 
