@@ -57,6 +57,8 @@ class Wordle():
         self.sort_by_score()
         print(self.wordle_words[:10]) 
         self.turn += 1
+    
+        
 
 
 def main():
