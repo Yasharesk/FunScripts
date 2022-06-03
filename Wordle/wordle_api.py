@@ -16,10 +16,10 @@ game = {1: wordle}
 @app.get("/newgame")
 def newgame():
     game[1] = Wordle()
-    return {"Suggestions": game[1].wordle_words[:10], "listLength": len(game[1].wordle_words)}
+    return {"Suggestions": game[1].wordle_words[:10], "Turn": game[1].turn}
 
 
 @app.post("/play-round")
 def play_round(response: Response):
     game[1].play_round(response.word_played, response.answer)
-    return {"Suggestions": game[1].wordle_words[:10], "listLength": len(game[1].wordle_words)}
+    return {"Suggestions": game[1].wordle_words[:10], "Turn": game[1].turn}

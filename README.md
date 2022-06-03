@@ -20,8 +20,7 @@ Different kind of mostly useless (as in very specific use cases) but fun scripts
 
 *Includes wordle.py:*
 
-Used for cheating at wordle. It gives you suggestions based on highest probablity of letters being included.
-Use one the suggested words, then give the word and answer back.
+Used for cheating at wordle. It gives you suggestions based on highest probablity of letters being included. Use one the suggested words, then give the word and answer back.
 Give the answers as five letters:
 <ul>
 <li>"g" for Green</li>
@@ -30,19 +29,19 @@ Give the answers as five letters:
 </ul>
 Use one of the words from new suggested list. Repeat until either you win or run out of moves. 
 
-*wordle_classbased.py:*
+* *wordle_classbased.py:*
 
-Same as worlde.py, only desinged with class. 
+    Same as worlde.py, only desinged with class. 
 
-*wordle_api.py:*
+* *wordle_api.py:*
 
-An API for serving the worlde_classbased.py using FastAPI.
+    An API for serving the worlde_classbased.py using FastAPI.
 
-Endpoints:
+    Endpoints:
 
-/newgame: Resets the words list and starts a new game.
+        /newgame: Resets the words list and starts a new game.
 
-/playround: Recieves a played word and response for it and returns updated list of words. 
+        /playround: Recieves a played word and response for it and returns updated list of words. 
 
 	
 	
