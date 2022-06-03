@@ -3,31 +3,35 @@ Different kind of mostly useless (as in very specific use cases) but fun scripts
 
 **Coins**:
 
-*Includes coins_price.py:*
+Includes 
 
-​	Used for getting the updated prices for a provided list of cryptocurrencies and uploading the results into a google sheet where the list of purchased crypto coins/tokens is stored. 
+* *coins_price.py:*
+
+    Used for getting the updated prices for a provided list of cryptocurrencies and uploading the results into a google sheet where the list of purchased crypto coins/tokens is stored. 
 
 ​	TODO: Add the structure of the google sheet. 
 
 ------
 
 **Clean Film Names:**
-برای مرتب کردن اسم فیلم هایی که به صورت فایل دانلود شده اند. اسم سایت ها، مشخصات کیفیت، زیرنویس و مانند آن ها را حذف کنیم و فقط نام فیلم و سال ساخت باقی بماند. 
+
+برای مرتب کردن اسم فیلم هایی که به صورت فایل دانلود شده اند. اسم سایت ها، مشخصات کیفیت، زیرنویس و مانند آن ها حذف شده و فقط نام فیلم و سال ساخت باقی بماند. 
 
 ------
 
 **Wordle**:
 
-*Includes wordle.py:*
+Includes 
+* *wordle.py:*
 
-Used for cheating at wordle. It gives you suggestions based on highest probablity of letters being included. Use one the suggested words, then give the word and answer back.
+    Used for cheating at wordle. It gives you suggestions based on highest probablity of letters being included. Use one the suggested words, then give the word and answer back.
 Give the answers as five letters:
-<ul>
-<li>"g" for Green</li>
-<li>"y" for Yellow</li>
-<li>"m" for grey (Miss)</li>
-</ul>
-Use one of the words from new suggested list. Repeat until either you win or run out of moves. 
+
+    * "g" for Green
+    * "y" for Yellow
+    * "m" for grey (Miss)
+
+    Use one of the words from new suggested list. Repeat until either you win or run out of moves. 
 
 * *wordle_classbased.py:*
 
