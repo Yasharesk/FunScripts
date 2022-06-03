@@ -28,12 +28,19 @@ Different kind of mostly useless (as in very specific use cases) but fun scripts
 	<li>"m" for grey (Miss)</li>
 	</ul>
 	Use one of the words from new suggested list. Repeat until either you win or run out of moves. 
+
 *wordle_classbased.py:*
+
 	Same as worlde.py, only desinged with class. 
+
 *wordle_api.py:*
+
 	An API for serving the worlde_classbased.py using FastAPI.
+
 	Endpoints:
+
 		/newgame: Resets the words list and starts a new game.
+
 		/playround: Recieves a played word and response for it and returns updated list of words. 
 
 	
