@@ -19,6 +19,7 @@ Different kind of mostly useless (as in very specific use cases) but fun scripts
 **Wordle**:
 
 *Includes wordle.py:*
+
 	Used for cheating at wordle. It gives you suggestions based on highest probablity of letters being included.
 	Use one the suggested words, then give the word and answer back.
 	Give the answers as five letters:
