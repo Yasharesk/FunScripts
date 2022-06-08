@@ -1,7 +1,7 @@
 # FunScripts
 Different kind of mostly useless (as in very specific use cases) but fun scripts.
 
-**Coins**:
+## Coins
 
 Includes 
 
@@ -11,15 +11,15 @@ Includes
 
 ​	TODO: Add the structure of the google sheet. 
 
-------
+---
 
-**Clean Film Names:**
+## Clean Film Names
 
 برای مرتب کردن اسم فیلم هایی که به صورت فایل دانلود شده اند. اسم سایت ها، مشخصات کیفیت، زیرنویس و مانند آن ها حذف شده و فقط نام فیلم و سال ساخت باقی بماند. 
 
-------
+---
 
-**Wordle**:
+## Wordle
 
 Includes 
 * *wordle.py:*
