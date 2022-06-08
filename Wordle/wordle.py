@@ -6,9 +6,9 @@ Created on Fri May  6 11:32:34 2022
 """
 
 from collections import Counter
+from typing import List
 
-
-def letter_count(word_list: list[str]) -> Counter:
+def letter_count(word_list: List[str]) -> Counter:
     '''Count the number of occurances of every letter in the list'''
     cnt = Counter()
     for word in word_list:
@@ -17,7 +17,7 @@ def letter_count(word_list: list[str]) -> Counter:
     return cnt
 
 
-def read_words() -> list[str]:
+def read_words() -> List[str]:
     '''Read the words from the file and create a list of 5 letter words'''
     words = []
     with open('Data/words') as f:
@@ -29,25 +29,25 @@ def read_words() -> list[str]:
     return wordle_words
 
 
-def letter_missed(word_list: list[str], letter: str) -> list[str]:
+def letter_missed(word_list: List[str], letter: str) -> List[str]:
     '''Update the word list if the letter is not in the word [response == 'm']'''
     # TODO: Add a check to make sure the previous hits are not removed
     return [x for x in word_list if letter not in x]
 
 
-def letter_found(word_list: list[str], letter: str, i: int) -> list[str]:
+def letter_found(word_list: List[str], letter: str, i: int) -> List[str]:
     '''Update the word list if the letter is in the word not in the right place [response == 'y']'''
     w = [x for x in word_list if letter in x]
     w = [x for x in w if letter != x[i]]
     return w
 
 
-def letter_hit(word_list: list[str], letter: str, i: int) -> list[str]:
+def letter_hit(word_list: List[str], letter: str, i: int) -> List[str]:
     '''Update the word list if the letter is in the word in the right place [response == 'g']'''
     return [x for x in word_list if x[i] == letter]
 
 
-def sort_by_score(word_list: list[str]) -> list[str]:
+def sort_by_score(word_list: List[str]) -> List[str]:
     '''
     Scores are calculated as the sum of the count of each letter in the list.
     List sorted by highest scores is returned.
@@ -57,7 +57,7 @@ def sort_by_score(word_list: list[str]) -> list[str]:
     return word_list
 
 
-def set_result(used: str, response: str) -> list[dict]:
+def set_result(used: str, response: str) -> List[dict]:
     '''Transform the 'word used' and 'response' provided by the user to a code readable format'''
     result = list(enumerate(zip(used, response)))
     result = [{'index': x[0], 'letter': x[1][0], 'response': x[1][1]} for x in result] 
