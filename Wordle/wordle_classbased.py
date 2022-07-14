@@ -55,7 +55,6 @@ class Wordle():
         for item in self.result:
             self.letter_response(item['letter'], item['index'], item['response'])
         self.sort_by_score()
-        print(self.wordle_words[:10]) 
         self.turn += 1
         
 
@@ -63,9 +62,9 @@ class Wordle():
 def main():
     wordle = Wordle()
     print('Here are the first suggestions to start the game:')
-    print(wordle.wordle_words[:10])
     
     while wordle.turn <= 6:
+        print(wordle.wordle_words[:10])
         used = input(f'Word played No. {wordle.turn}: ')
         chk = True
         while chk:
