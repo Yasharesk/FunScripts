@@ -16,7 +16,7 @@ class Wordle():
                 self.wordle_words.append(line.strip().lower())
         self.wordle_words = [x for x in self.wordle_words if len(x) == 5]
         self.wordle_words = [x for x in self.wordle_words if '\'' not in x]
-        self.wordle_words = [x for x in self.wordle_words if len(set(x)) == 5]
+        # self.wordle_words = [x for x in self.wordle_words if len(set(x)) == 5]
         self.sort_by_score()
 
 
