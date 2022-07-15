@@ -57,6 +57,6 @@ for test_word in w.wordle_words:
         loses.append(result)
 
 print(f'Win rate was {wins/total_words*100:.2f} and loses on {len(loses)} words')
-for item in loses:
-    print(f'{item.get("result")}: {item.get("test_word")}')
+with open('Data/losing_words.txt', 'w') as f:
+    f.writelines([f'{item.get("result")}: {item.get("test_word")}' for item in loses])
 
