@@ -1,4 +1,3 @@
-from pyparsing import Word
 from wordle_classbased import Wordle
 
 
