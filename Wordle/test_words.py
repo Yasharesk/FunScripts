@@ -1,3 +1,4 @@
+from pyparsing import Word
 from wordle_classbased import Wordle
 
 
@@ -20,18 +21,42 @@ def test_play(test_word: str):
         cnt += 1
         used = wordle.wordle_words[0]
         response = check_guess(test_word, used)
-        print(f'{used} was played and the response was {response}')
+        # print(f'{used} was played and the response was {response}')
         if response == 'ggggg':
-            print(f'Win in {cnt} moves on the word {test_word}')
-            break
+            return {'result': 'WIN', 'moves': cnt, 'test_word': test_word}
         wordle.play_round(used, response)
         if len(wordle.wordle_words) == 0:
-            print(f'The word {test_word} was not found')
+            return {'result': 'NOT_FOUND', 'moves': cnt, 'test_word': test_word}
+            
     if wordle.turn > 6:
-        print(f'Failed with a list of {len(wordle.wordle_words)} remaining')
+        return {'result': 'OUT_OF_MOVES', 'moves': cnt, 'test_word': test_word, 'remaining': len(wordle.wordle_words)}
 
 
-test_words = ['liver', 'llama', 'apple']
+test_words = ['liver', 'llama', 'apple', 'wedge']
 for test_word in test_words:
     print('-------------------------------------------')
-    test_play(test_word)
+    result = test_play(test_word)
+    match result.get('result'):
+        case 'WIN':
+            print(f'Win in {result.get("moves")} moves on the word {result.get("test_word")}')
+        case 'NOT_FOUND':
+            print(f'The word {result.get("test_word")} was not found')
+        case 'OUT_OF_MOVES':
+            print(f'Failed with a list of {result.get("remaining")} remaining')
+
+
+w = Wordle()
+total_words = len(w.wordle_words)
+wins = 0
+loses = []
+for test_word in w.wordle_words:
+    result = test_play(test_word)
+    if result.get('result') == 'WIN':
+        wins += 1
+    else:
+        loses.append(result)
+
+print(f'Win rate was {wins/total_words*100:.2f} and loses on {len(loses)} words')
+for item in loses:
+    print(f'{item.get("result")}: {item.get("test_word")}')
+
