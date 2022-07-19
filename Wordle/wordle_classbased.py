@@ -20,16 +20,19 @@ class Wordle():
         self.sort_by_score()
 
 
-    def letter_response(self, letter: str, i: int, response: str) -> None:
-        if response == 'm':
-            self.wordle_words = [x for x in self.wordle_words if letter not in x]
-        elif response == 'y':
-            self.wordle_words = [x for x in self.wordle_words if letter in x]
-            self.wordle_words = [x for x in self.wordle_words if letter != x[i]]
-        elif response == 'g':
-            self.wordle_words = [x for x in self.wordle_words if x[i] == letter]
-        else:
-            raise ValueError('Response letter not recognized')   
+    def letter_response(self) -> None:
+        greens = [x['letter'] for x in self.result if x['response'] == 'g']
+        for item in self.result:
+            if item['response'] == 'g':
+                self.wordle_words = [x for x in self.wordle_words if x[item['index']] == item['letter']]
+            elif item['response'] == 'y':
+                self.wordle_words = [x for x in self.wordle_words if item['letter'] in x]
+                self.wordle_words = [x for x in self.wordle_words if item['letter'] != x[item['index']]]
+            elif item['response'] == 'm':
+                if item['letter'] not in greens:
+                    self.wordle_words = [x for x in self.wordle_words if item['letter'] not in x]
+            else:
+                raise ValueError('Response letter not recognized')   
 
 
     def sort_by_score(self) -> None:
@@ -52,8 +55,7 @@ class Wordle():
 
     def play_round(self, used: str, response: str) -> None:
         self.set_result(used, response)
-        for item in self.result:
-            self.letter_response(item['letter'], item['index'], item['response'])
+        self.letter_response()
         self.sort_by_score()
         self.turn += 1
         

@@ -1,5 +1,5 @@
 from wordle_classbased import Wordle
-
+from datetime import datetime
 
 def check_guess(word: str, guess: str) -> str:
     result = ''
@@ -56,6 +56,6 @@ for test_word in w.wordle_words:
         loses.append(result)
 
 print(f'Win rate was {wins/total_words*100:.2f} and loses on {len(loses)} words')
-with open('Data/losing_words.txt', 'w') as f:
+with open(f'Data/losing_words_{datetime.today().strftime("%y-%m-%d")}.txt', 'w') as f:
     f.writelines([f'{item.get("result")}: {item.get("test_word")}' for item in loses])
 
