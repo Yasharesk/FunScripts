@@ -6,17 +6,20 @@ Created on Fri May  6 11:32:34 2022
 """
 from collections import Counter
 
+def create_word_list(path: str = 'Data/words'):
+    wordle_words = []
+    with open('Data/words') as f:
+        for line in f.readlines():
+            wordle_words.append(line.strip().lower())
+    wordle_words = [x for x in wordle_words if len(x) == 5]
+    wordle_words = [x for x in wordle_words if '\'' not in x]
+    # self.wordle_words = [x for x in self.wordle_words if len(set(x)) == 5]
+    return wordle_words
 
 class Wordle():
-    def __init__(self) -> None:
-        self.turn = 1
-        self.wordle_words = []
-        with open('Data/words') as f:
-            for line in f.readlines():
-                self.wordle_words.append(line.strip().lower())
-        self.wordle_words = [x for x in self.wordle_words if len(x) == 5]
-        self.wordle_words = [x for x in self.wordle_words if '\'' not in x]
-        # self.wordle_words = [x for x in self.wordle_words if len(set(x)) == 5]
+    def __init__(self, wordle_words: list[str]) -> None:
+        self.turn = 1        
+        self.wordle_words = wordle_words
         self.sort_by_score()
 
 
@@ -62,7 +65,7 @@ class Wordle():
 
 
 def main():
-    wordle = Wordle()
+    wordle = Wordle(create_word_list())
     print('Here are the first suggestions to start the game:')
     
     while wordle.turn <= 6:
