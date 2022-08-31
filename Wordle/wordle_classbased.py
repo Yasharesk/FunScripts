@@ -5,6 +5,7 @@ Created on Fri May  6 11:32:34 2022
 @author: Yashar
 """
 from collections import Counter
+from typing import List
 
 def create_word_list(path: str = 'Data/words'):
     wordle_words = []
@@ -17,7 +18,7 @@ def create_word_list(path: str = 'Data/words'):
     return wordle_words
 
 class Wordle():
-    def __init__(self, wordle_words: list[str]) -> None:
+    def __init__(self, wordle_words: List[str]) -> None:
         self.turn = 1        
         self.wordle_words = wordle_words
         self.sort_by_score()
