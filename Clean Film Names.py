@@ -14,7 +14,7 @@ REMOVE_LIST = r'720p|BluRay|x264|YIFY|juggs|\[ETRG\]|HDRip|\[YTS.AG\]|dvdrip|xvi
         |H264|AC3|xvid|aac|brrip|\[|\]|\{|\}|saas|mp3|rarbg|web-dl|1080p|dvdscr|tehmovies|\
             teh-music|mkvcage| Hc|ganool|-Evo|bdrip|teh-music|nex1movie|shaanig|\
         Korsub|webrip|aqos|S4A|-sam|blu-ray| biz|480p|Mkvhub|Film2Movie|Galaxyrg|\
-            Tehtmovies|- Com|Iran-film|30Nama|Wb-Dl|x265|2Ch|10Bit|Psa|Pahe'
+            Tehtmovies|- Com|Iran-film|30Nama|Wb-Dl|x265|2Ch|10Bit|Psa|Pahe|-Ctu'
 INITIAL_DIR = 'D:/Downloads/'
 
 
