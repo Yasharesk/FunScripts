@@ -3,26 +3,26 @@ import Cleaner
 
 INITIAL_DIR = 'D:/Downloads/'
 DONE = 'Done!'
+NOT_SELECTED = 'Select a folder'
 
-# sg.theme('DarkTeal')   # Add a touch of color
+# sg.theme('DarkTeal')
 layout = [  [sg.Text('Add any extra words you want removed:'), sg.InputText(size=(25,3), tooltip='Separate words with a comma, no special characters', key='-WORDS-')],
-            [sg.FolderBrowse('Select a folder', key='-FOLDER-', initial_folder=INITIAL_DIR), sg.Text('', key='selected_dir') ],
-            [sg.Button('Ok', disabled=False, key='ok_btn'), sg.Button('Cancel')] ]
+            [sg.FolderBrowse(key='-FOLDER-', initial_folder=INITIAL_DIR, target='-SELECTED_DIR-'), 
+                sg.InputText(NOT_SELECTED, key='-SELECTED_DIR-', readonly=True, disabled_readonly_background_color='#64778D', disabled_readonly_text_color='#FFFFFF') ],
+            [sg.Button('Ok', disabled=False, key='-OK-'), sg.Button('Cancel')] ]
 
 window = sg.Window('Window Title', layout)
 
 while True:
     event, values = window.read()
-    print(event, values)
+    print(f'Events: {event}, Values: {values}')
     if event == sg.WIN_CLOSED or event == 'Cancel':
         break
-    if event == '-FOLDER-':
-        window['selected_dir'].update(values['-FOLDER-'])
-    if len(values['-FOLDER-']) != 0:
-        # Cleaner.clean_directory(values['FOLDER'])
-        window['selected_dir'].update(DONE)
-        window['-FOLDER-'].update('')
+    if (values['-SELECTED_DIR-'] == NOT_SELECTED) or (values['-SELECTED_DIR-'] == DONE):
+        window['-SELECTED_DIR-'].update(NOT_SELECTED)
     else:
-        window['selected_dir'].update('First select a folder!')
-
+        # Cleaner.clean_directory(values['FOLDER'])
+        print('Trying to udpate selected folder')
+        window['-SELECTED_DIR-'].update(DONE)
+        
 window.close()
