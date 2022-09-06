@@ -19,6 +19,12 @@ Includes
 
 ---
 
+## Clean Film Names (Dir)
+
+Upgraded version of Clean Film Names with PYSimpleGUI for selecting the folder and adding extra temporary words to be removed from file names. 
+
+---
+
 ## Wordle
 
 Includes 

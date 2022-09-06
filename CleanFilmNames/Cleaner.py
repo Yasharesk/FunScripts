@@ -11,13 +11,12 @@ class DirCleaner:
     def add_words(self, additional_words: str) -> None:
         additional_words = '|'.join(additional_words.split(','))
         additional_words = re.sub(r'[^\|\w\d]', '', additional_words)
-        print(f'additional words: {additional_words}')
         self.remove_list += '|'
         self.remove_list += additional_words
 
     
     def clean_file_name(self, file_name: str) -> str:
-        file_name = re.sub(r'[\._\s{2,}]', ' ', file_name, flags=re.IGNORECASE)
+        file_name = re.sub(r'[\._]|\s{2,}', ' ', file_name, flags=re.IGNORECASE)
         file_name = re.sub(r'[\[\]]', ' ', file_name, flags=re.IGNORECASE)
         file_name = re.sub(self.remove_list, '', file_name, flags=re.IGNORECASE)
         file_name = file_name.strip().strip('-')
@@ -33,3 +32,4 @@ class DirCleaner:
             if len(item[1])>0:
                 for dir_name in item[1]:
                     os.rename(os.path.join(item[0], dir_name), os.path.join(item[0], self.clean_file_name(dir_name)))
+                    
