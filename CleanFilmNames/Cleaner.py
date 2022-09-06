@@ -1,42 +1,35 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jun 19 01:14:05 2020
-
-@author: Yashar
-"""
-
 import os
 import re
-from tkinter import filedialog
 
 
-REMOVE_LIST = r'720p|BluRay|x264|YIFY|juggs|\[ETRG\]|HDRip|\[YTS.AG\]|dvdrip|xvid|ETRG|HDTV|\
-        |H264|AC3|xvid|aac|brrip|\[|\]|\{|\}|saas|mp3|rarbg|web-dl|1080p|dvdscr|tehmovies|\
-            teh-music|mkvcage| Hc|ganool|-Evo|bdrip|teh-music|nex1movie|shaanig|\
-        Korsub|webrip|aqos|S4A|-sam|blu-ray| biz|480p|Mkvhub|Film2Movie|Galaxyrg|\
-            Tehtmovies|- Com|Iran-film|30Nama|Wb-Dl|x265|2Ch|10Bit|Psa|Pahe|-Ctu'
+class DirCleaner:
+    def __init__(self, dir_path: str,  remove_list: str) -> None:
+        self.remove_list = '|'.join(remove_list.split(','))
+        self.dir_path = dir_path
 
 
+    def add_words(self, additional_words: str) -> None:
+        additional_words = '|'.join(additional_words.split(','))
+        additional_words = re.sub(r'[^\|\w\d]', '', additional_words)
+        print(f'additional words: {additional_words}')
+        self.remove_list += '|'
+        self.remove_list += additional_words
 
-def remove_extra_words(file_name: str, remove_list: str = REMOVE_LIST) -> str:
-    file_name = re.sub(remove_list, '', file_name, flags=re.IGNORECASE)
-    file_name = re.sub('\.', ' ', file_name, flags=re.IGNORECASE)
-    file_name = re.sub('_', ' ', file_name, flags=re.IGNORECASE)
-    file_name = re.sub('  ', ' ', file_name, flags=re.IGNORECASE)
-    file_name = file_name.strip().title()
-    file_name = file_name.strip('-')
-    file_name = re.sub('file', 'changed', file_name, flags=re.IGNORECASE)
-    return file_name.strip().title()
-
-
-def clean_directory(folder_path: str) -> None:
-    mypath = list(reversed(list(os.walk(folder_path))))
-    for item in mypath:
-        for file_name in item[2]:
-            f_name, f_ext = os.path.splitext(file_name)
-            os.rename(os.path.join(item[0], file_name), os.path.join(item[0], remove_extra_words(f_name)+f_ext))
-        if len(item[1])>0:
-            for dir_name in item[1]:
-                os.rename(os.path.join(item[0], dir_name), os.path.join(item[0], remove_extra_words(dir_name)))
+    
+    def clean_file_name(self, file_name: str) -> str:
+        file_name = re.sub(r'[\._\s{2,}]', ' ', file_name, flags=re.IGNORECASE)
+        file_name = re.sub(r'[\[\]]', ' ', file_name, flags=re.IGNORECASE)
+        file_name = re.sub(self.remove_list, '', file_name, flags=re.IGNORECASE)
+        file_name = file_name.strip().strip('-')
+        return file_name.title()
 
 
+    def clean_directory(self) -> None:
+        mypath = list(reversed(list(os.walk(self.dir_path))))
+        for item in mypath:
+            for file_name in item[2]:
+                f_name, f_ext = os.path.splitext(file_name)
+                os.rename(os.path.join(item[0], file_name), os.path.join(item[0], self.clean_file_name(f_name)+f_ext))
+            if len(item[1])>0:
+                for dir_name in item[1]:
+                    os.rename(os.path.join(item[0], dir_name), os.path.join(item[0], self.clean_file_name(dir_name)))
