@@ -6,15 +6,19 @@ Created on Fri May  6 11:32:34 2022
 """
 from collections import Counter
 from typing import List
+from os import path
 
-def create_word_list(path: str = 'Data/words'):
+WORDS_FILE = 'words'
+WORDS_PATH = 'Data'
+
+
+def create_word_list():
     wordle_words = []
-    with open('Data/words') as f:
+    with open(path.join(WORDS_PATH, WORDS_FILE)) as f:
         for line in f.readlines():
             wordle_words.append(line.strip().lower())
     wordle_words = [x for x in wordle_words if len(x) == 5]
     wordle_words = [x for x in wordle_words if '\'' not in x]
-    # self.wordle_words = [x for x in self.wordle_words if len(set(x)) == 5]
     return wordle_words
 
 class Wordle():
@@ -27,16 +31,30 @@ class Wordle():
     def letter_response(self) -> None:
         greens = [x['letter'] for x in self.result if x['response'] == 'g']
         for item in self.result:
-            if item['response'] == 'g':
-                self.wordle_words = [x for x in self.wordle_words if x[item['index']] == item['letter']]
-            elif item['response'] == 'y':
-                self.wordle_words = [x for x in self.wordle_words if item['letter'] in x]
-                self.wordle_words = [x for x in self.wordle_words if item['letter'] != x[item['index']]]
-            elif item['response'] == 'm':
-                if item['letter'] not in greens:
-                    self.wordle_words = [x for x in self.wordle_words if item['letter'] not in x]
-            else:
-                raise ValueError('Response letter not recognized')   
+            match item['response']:
+                case 'g': 
+                    self.wordle_words = [x for x in self.wordle_words if x[item['index']] == item['letter']]
+                case 'y': 
+                    self.wordle_words = [x for x in self.wordle_words if item['letter'] in x]
+                    self.wordle_words = [x for x in self.wordle_words if item['letter'] != x[item['index']]]
+                case 'm':
+                    if item['letter'] not in greens:
+                        self.wordle_words = [x for x in self.wordle_words if item['letter'] not in x]
+                case _:
+                    raise ValueError('Response letter not recognized')
+            
+            
+            ''' For Python version < 10'''
+            # if item['response'] == 'g':
+            #     self.wordle_words = [x for x in self.wordle_words if x[item['index']] == item['letter']]
+            # elif item['response'] == 'y':
+            #     self.wordle_words = [x for x in self.wordle_words if item['letter'] in x]
+            #     self.wordle_words = [x for x in self.wordle_words if item['letter'] != x[item['index']]]
+            # elif item['response'] == 'm':
+            #     if item['letter'] not in greens:
+            #         self.wordle_words = [x for x in self.wordle_words if item['letter'] not in x]
+            # else:
+            #     raise ValueError('Response letter not recognized')
 
 
     def sort_by_score(self) -> None:
