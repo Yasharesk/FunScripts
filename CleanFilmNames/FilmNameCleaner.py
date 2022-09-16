@@ -1,23 +1,25 @@
 import PySimpleGUI as sg
 from Cleaner import DirCleaner
 
-INITIAL_DIR = 'D:/Downloads/'
-WORD_LIST_FILE = 'word_list.txt'
+WORD_LIST_FILE = './words.txt'
 
 DONE = 'Done!'
 NOT_SELECTED = 'Select a folder'
 
-
-with open(WORD_LIST_FILE) as f:
-    remove_list = f.readline()
-
-# sg.theme('DarkTeal')
 layout = [  [sg.Text('Add any extra words you want removed:'), sg.InputText(size=(25,3), tooltip='Separate words with a comma, spaces are ignored', key='-WORDS-')],
-            [sg.FolderBrowse(key='-FOLDER-', size=6, initial_folder=INITIAL_DIR, target='-SELECTED_DIR-'), 
+            [sg.FolderBrowse(key='-FOLDER-', size=6, target='-SELECTED_DIR-'), 
                 sg.InputText(NOT_SELECTED, size=51 , key='-SELECTED_DIR-', readonly=True, disabled_readonly_background_color='#64778D', disabled_readonly_text_color='#FFFFFF') ],
             [sg.Button('Ok', size=6, disabled=False, key='-OK-'), sg.Button('Cancel', size=6)] ]
 
 window = sg.Window('Clean Film Names', layout)
+
+try:
+    with open(WORD_LIST_FILE) as f:
+        remove_list = f.readline()
+        print('Done')
+except FileNotFoundError:
+    sg.popup('Error! Words file not found', no_titlebar=True)
+    window.close()
 
 while True:
     event, values = window.read()
