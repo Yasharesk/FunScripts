@@ -14,7 +14,7 @@ WORDS_PATH = 'Data'
 
 def create_word_list():
     wordle_words = []
-    with open(path.join(WORDS_PATH, WORDS_FILE)) as f:
+    with open(path.join(path.dirname(__file__), WORDS_PATH, WORDS_FILE)) as f:
         for line in f.readlines():
             wordle_words.append(line.strip().lower())
     wordle_words = [x for x in wordle_words if len(x) == 5]
