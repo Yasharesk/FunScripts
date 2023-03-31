@@ -1,7 +1,13 @@
 # FunScripts
-Different kind of mostly useless (as in very specific use cases) but fun scripts.
 
-## Coins
+#### **Different kind of mostly useless (as in very specific use cases) but fun scripts.**
+
+
+---
+
+<br>
+
+## 1- Coins
 
 Includes 
 
@@ -11,21 +17,31 @@ Includes
 
 ​	TODO: Add the structure of the google sheet. 
 
+<br>
+
 ---
 
-## Clean Film Names
+<br>
+
+## 2- Clean Film Names
 
 برای مرتب کردن اسم فیلم هایی که به صورت فایل دانلود شده اند. اسم سایت ها، مشخصات کیفیت، زیرنویس و مانند آن ها حذف شده و فقط نام فیلم و سال ساخت باقی بماند. 
 
+<br>
+
 ---
 
-## Clean Film Names (Dir)
+<br>
+
+## 3- Clean Film Names (Dir)
 
 Upgraded version of Clean Film Names with PYSimpleGUI for selecting the folder and adding extra temporary words to be removed from file names. 
 
 ---
 
-## Wordle
+<br>
+
+## 4- Wordle
 
 Includes 
 * *wordle.py:*
@@ -53,5 +69,19 @@ Give the answers as five letters:
 
         /playround: Recieves a played word and response for it and returns updated list of words. 
 
-	
-	
+<br>
+
+---
+
+<br>
+
+## 5- SpellingBee
+
+Includes: 
+* *spellingBee.py*
+
+    Used to help with NYTimes game, Spelling Bee. Takes the letters available, and then the center letter which should be included in the word and return as list of 4 or more letterd words available in the words file.
+
+<br>
+
+---
