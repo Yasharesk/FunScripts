@@ -27,4 +27,6 @@ letters = input('List of letters: ').strip().lower()
 center = input('Center letter: ').strip().lower()
 
 result = [w for w in word_list if check(set(w), set(letters), center)]
-print(result)
+result.sort(key=len, reverse=True)
+for r in result:
+    print(r)
