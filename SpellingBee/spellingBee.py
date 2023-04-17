@@ -30,3 +30,4 @@ result = [w for w in word_list if check(set(w), set(letters), center)]
 result.sort(key=len, reverse=True)
 for r in result:
     print(r)
+input('Press any key to terminate...')
